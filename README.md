@@ -1,24 +1,65 @@
 # README
+## usersテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column   | Type         | Options     | 
+| -------- | ------       | ----------- | 
+| name     | string       | null: false | 
+| email    | unique: true | null: false | 
+| password | string       | null: false | 
+| birthday | string       | null: false | 
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many :items
+- has_many :purchases
+- has_one :address
 
-* System dependencies
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+| Column                | Type   | Options     | 
+| ------------          | ------ | ----------- | 
+| name                  | string | null: false | 
+| price                 | string | null: false | 
+| category              | string | null: false | 
+| status                | string | null: false | 
+| delivery_fee          | string | null: false | 
+| place                 | string | null: false | 
+| delivery_date         | string | null: false | 
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :purchase
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## addressesテーブル
 
-* ...
+| Column       | Type   | Options     | 
+| ------------ | ------ | ----------- | 
+| postal_code  | string | null: false | 
+| state        | string | null: false | 
+| city         | string | null: false | 
+| address_line | string | null: false | 
+| phone_number | string | null: false | 
+
+### Association
+
+- belongs_to :user
+- belongs_to :purchase
+
+
+## purchaseテーブル
+
+| Column        | Type   | Options     | 
+| ------------- | ------ | ----------- | 
+| item_name     | string | null: false | 
+| user_name     | string | null: false | 
+| purchase_date | string | null: false | 
+
+### Association
+
+- belongs_to :item
+- belongs_to :user
+- has_many :addresses
+
