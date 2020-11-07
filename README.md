@@ -21,17 +21,17 @@
 
 ## itemsテーブル
 
-| Column                   | Type    | Options     | 
-| ------------------------ | ------- | ----------- | 
-| name                     | string  | null: false | 
-| price                    | integer | null: false |
-| explain_item             | string  | null: false |
-| seller_name              | string  | null: false | 
-| category_id              | integer | null: false | 
-| status_id                | integer | null: false | 
-| delivery_fee_id          | integer | null: false | 
-| place_id                 | integer | null: false | 
-| delivery_date_id         | integer | null: false | 
+| Column                   | Type       | Options     | 
+| ------------------------ | -------    | ----------- | 
+| name                     | string     | null: false | 
+| price                    | integer    | null: false |
+| explain_item             | text       | null: false |
+| user_name                | string     | null: false | 
+| category_id              | integer    | null: false | 
+| status_id                | integer    | null: false | 
+| delivery_fee_id          | integer    | null: false | 
+| place_id                 | integer    | null: false | 
+| delivery_date_id         | integer    | null: false | 
 
 ### Association
 
@@ -48,7 +48,7 @@
 | city           | string   | null: false |
 | house_number   | string   | null: false |
 | building_name  | string   | null: false | 
-| phone_number   | integer  | null: false | 
+| phone_number   | string  | null: false | 
 
 ### Association
 
@@ -57,10 +57,10 @@
 
 ## purchasesテーブル
 
-| Column        | Type      | Options     | 
-| ------------- | --------- | ----------- | 
-| item_id       | reference | null: false | 
-| user_id       | reference | null: false | 
+| Column           | Type    | Options     | 
+| ---------------- | ------- | ----------- | 
+| item_id          | integer | null: false | 
+| user_id          | integer | null: false | 
 
 ### Association
 
