@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname, :birthday
-    validates :first_name, :last_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-    validates :first_reading, :last_reading, format: { with: /\A[ァ-ヶー－]+\z/ }
+    validates :first_name, :last_name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "Full-width characters" }
+    validates :first_reading, :last_reading, format: { with: /\A[ァ-ヶー－]+\z/, message: "Full-width katakana characters" }
   end
 end

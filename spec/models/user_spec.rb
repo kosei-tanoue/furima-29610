@@ -17,20 +17,40 @@ RSpec.describe User, type: :model do
       user.valid?
       expect(user.errors.full_messages).to include("First name can't be blank")
     end
+    it "first_nameは全角でないと登録できない" do
+      user = User.new(nickname: "spec", email: "test@spec", first_name: "aa", last_name:"太郎", first_reading:"スペック", last_reading:"タロウ", birthday:"1930-01-01", password: "spec1234", password_confirmation: "spec1234")
+      user.valid?
+      expect(user.errors.full_messages).to include("First name Full-width characters")
+    end
     it "last_nameが空では登録できない" do
       user = User.new(nickname: "spec", email: "test@spec", first_name: "スペック", last_name:"", first_reading:"スペック", last_reading:"タロウ", birthday:"1930-01-01", password: "spec1234", password_confirmation: "spec1234")
       user.valid?
       expect(user.errors.full_messages).to include("Last name can't be blank")
+    end
+    it "last_nameは全角でないと登録できない" do
+      user = User.new(nickname: "spec", email: "test@spec", first_name: "スペック", last_name:"tarou", first_reading:"スペック", last_reading:"タロウ", birthday:"1930-01-01", password: "spec1234", password_confirmation: "spec1234")
+      user.valid?
+      expect(user.errors.full_messages).to include("Last name Full-width characters")
     end
     it "first_readingが空では登録できない" do
       user = User.new(nickname: "spec", email: "test@spec", first_name: "スペック", last_name:"太郎", first_reading:"", last_reading:"タロウ", birthday:"1930-01-01", password: "spec1234", password_confirmation: "spec1234")
       user.valid?
       expect(user.errors.full_messages).to include("First reading can't be blank")
     end
+    it "first_readingはカタカナでないと登録できない" do
+      user = User.new(nickname: "spec", email: "test@spec", first_name: "スペック", last_name:"太郎", first_reading:"すぺっく", last_reading:"タロウ", birthday:"1930-01-01", password: "spec1234", password_confirmation: "spec1234")
+      user.valid?
+      expect(user.errors.full_messages).to include("First reading Full-width katakana characters")
+    end
     it "last_readingが空では登録できない" do
         user = User.new(nickname: "spec", email: "test@spec", first_name: "スペック", last_name:"太郎", first_reading:"スペック", last_reading:"", birthday:"1930-01-01", password: "spec1234", password_confirmation: "spec1234")
         user.valid?
         expect(user.errors.full_messages).to include("Last reading can't be blank")
+    end
+    it "last_readingはカタカナでないと登録できない" do
+      user = User.new(nickname: "spec", email: "test@spec", first_name: "スペック", last_name:"太郎", first_reading:"スペック", last_reading:"たろう", birthday:"1930-01-01", password: "spec1234", password_confirmation: "spec1234")
+      user.valid?
+      expect(user.errors.full_messages).to include("Last reading Full-width katakana characters")
     end
     it "birthdayが空では登録できない" do
       user = User.new(nickname: "spec", email: "test@spec", first_name: "スペック", last_name:"太郎", first_reading:"スペック", last_reading:"", birthday:"", password: "spec1234", password_confirmation: "spec1234")
