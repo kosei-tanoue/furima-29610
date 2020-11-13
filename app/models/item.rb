@@ -10,6 +10,6 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :category_id, :status_id, :delivery_fee_id, :place_id, :delivery_date_id, numericality: { other_than: 1 }
-
+    validates :price, inclusion: { in: 300..9999999 }
   end
 end
