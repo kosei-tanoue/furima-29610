@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :place
   belongs_to :delivery_date
 
-  with_options presence true do
+  with_options presence: true do
     validates :category_id, :status_id, :delivery_fee_id, :place_id, :delivery_date_id, numericality: { other_than: 1 }
 
   end
