@@ -9,7 +9,8 @@ class Item < ApplicationRecord
   belongs_to :delivery_date
 
   with_options presence: true do
-    validates :category_id, :status_id, :delivery_fee_id, :place_id, :delivery_date_id, numericality: { other_than: 1 }
-    validates :price, inclusion: { in: 300..9999999 }, format: { with: /\A[0-9]+\z/, message: "は半角数字で入力してください" }
+    validates :image, :name, :explain_item
+    validates :price, inclusion: { in: 300..9999999 , message: "Out of setting range"}, format: { with: /\A[0-9]+\z/, message: "Half-width number" }
+    validates :category_id, :status_id, :delivery_fee_id, :place_id, :delivery_date_id, numericality: { other_than: 1 , message: "Select"}
   end
 end

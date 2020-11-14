@@ -10,7 +10,11 @@ class ItemsController < ApplicationController
   def create
     # binding.pry
     @item = Item.create(item_params)
-    @item.save
+    if @item.save
+      redirect_to :index
+    else
+      render :new
+    end
   end
 
 
