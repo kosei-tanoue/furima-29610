@@ -11,7 +11,7 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :image, :name, :explain_item
-    validates :price, inclusion: { in: 300..9999999 , message: "Out of setting range"}, format: { with: /\A[0-9]+\z/, message: "Half-width number" }
+    validates :price, inclusion: { in: 300..9999999 , message: "Out of setting range"}, numericality: { with: /\A[0-9]+\z/, message: "Half-width number" } 
     validates :category_id, :status_id, :delivery_fee_id, :place_id, :delivery_date_id, numericality: { other_than: 1 , message: "Select"}
   end
 end
