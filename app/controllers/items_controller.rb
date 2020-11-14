@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
     # binding.pry
     @item = Item.create(item_params)
     if @item.save
-      redirect_to :index
+      redirect_to items_path
     else
       render :new
     end
