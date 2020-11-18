@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @item = Item.create(item_params)
     if @item.save
       redirect_to items_path
@@ -18,7 +17,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # binding.pry
     @item = Item.find(params[:id])
   end
 
