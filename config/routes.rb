@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :items do
     member do
       get :orders, to: 'orders#index'
+      post :orders, to: 'orders#create'
     end
   end
 end
