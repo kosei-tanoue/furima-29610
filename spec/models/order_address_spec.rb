@@ -5,14 +5,21 @@ RSpec.describe OrderAddress, type: :model do
     @order_address = FactoryBot.build(:order_address)
   end
 
-  describe '住所入力' do
-    context '住所入力がうまくいくとき' do
-      it '住所に関する全ての必須項目を埋めていれば購入できる' do
+  describe '購入機能' do
+    context '購入がうまくいくとき' do
+      it 'クレジットカードの情報、住所に関する全ての必須項目を埋めていれば購入できる' do
         expect(@order_address).to be_valid
       end      
     end
 
-    context '住所入力がうまくいかないとき' do
+    context '購入がうまくいかないとき' do
+      it 'tokenが空では購入できない' do
+        @order_address.token = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+
+
       it '郵便番号が空だと購入出来ない' do
         @order_address.postal_code = nil
         @order_address.valid?
