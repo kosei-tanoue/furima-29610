@@ -10,6 +10,11 @@ RSpec.describe OrderAddress, type: :model do
       it 'クレジットカードの情報、住所に関する全ての必須項目を埋めていれば購入できる' do
         expect(@order_address).to be_valid
       end
+
+      it 'building_nameは空でも登録できる' do
+        @order_address.building_name = ""
+        @order_address.valid?
+      end
     end
 
     context '購入がうまくいかないとき' do
@@ -37,30 +42,37 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Postal code Input correctly')
       end
 
+      
       it '都道府県が選択されていなければ購入できない' do
         @order_address.prefecture_id = 1
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Prefecture Select')
       end
-
+      
       it '市町村が入力されていなければ購入できない' do
         @order_address.city = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("City can't be blank")
       end
-
+      
       it '番地が入力されていなければ購入できない' do
         @order_address.house_number = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("House number can't be blank")
       end
-
+      
       it '電話番号が入力されていないければ購入できない' do
         @order_address.phone_number = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank", 'Phone number Input only number')
       end
-
+      
+      it '電話番号が12桁以上では購入できない' do
+        @order_address.phone_number = "12345678901234"
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+      end
+      
       it '電話番号にハイフンが含まれていると購入できない' do
         @order_address.phone_number = '090-1111-1111'
         @order_address.valid?
