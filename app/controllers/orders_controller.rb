@@ -1,8 +1,7 @@
 class OrdersController < ApplicationController
   before_action :item_find, only: [:index, :create, :pay_item, :move_to_index, :not_access_sold_out]
-  before_action :move_to_sign_in, only: [:index]
+  before_action :authenticate_user!, only: [:index]
   before_action :move_to_index, only: [:index]
-  before_action :not_access_sold_out, only: [:index]
 
   def index
     @order_address = OrderAddress.new
@@ -40,17 +39,8 @@ class OrdersController < ApplicationController
     )
   end
 
-
-  def move_to_sign_in
-    redirect_to new_user_session_path unless user_signed_in?
-  end
-
   def move_to_index
-    redirect_to root_path if current_user.id == @item.user_id
-  end
-
-  def not_access_sold_out
-    if @item.order.present?
+    if current_user.id == @item.user_id || @item.order.present?
       redirect_to root_path
     end
   end
