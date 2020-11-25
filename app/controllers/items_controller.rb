@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, only: [:show, :edit, :update, :destroy, :not_access_sold_out]
   before_action :not_access_sold_out, only: [:edit]
+  before_action :move_to_root, only: [:edit]
+
   def index
     @items = Item.order('created_at DESC')
   end
@@ -54,6 +56,12 @@ class ItemsController < ApplicationController
 
   def not_access_sold_out
     if @item.order.present?
+      redirect_to root_path
+    end
+  end
+
+  def move_to_root
+    if current_user.id != @item.user_id
       redirect_to root_path
     end
   end
