@@ -53,12 +53,6 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def not_access_sold_out
-    if @item.order.present?
-      redirect_to root_path
-    end
-  end
-
   def move_to_root
     if current_user.id != @item.user_id || @item.order.present?
       redirect_to root_path
