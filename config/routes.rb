@@ -8,7 +8,3 @@ Rails.application.routes.draw do
   end
 end
 
-# member do
-#   get :orders, to: 'orders#index'
-#   post :orders, to: 'orders#create'
-# end
