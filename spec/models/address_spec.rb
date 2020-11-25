@@ -9,7 +9,7 @@ RSpec.describe Address, type: :model do
     context '住所入力がうまくいくとき' do
       it '住所に関する全ての必須項目を埋めていれば購入できる' do
         expect(@address).to be_valid
-      end      
+      end
     end
 
     context '住所入力がうまくいかないとき' do
