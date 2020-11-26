@@ -1,6 +1,6 @@
 function fee(){
   const itemPrice = document.getElementById("item-price");
-  itemPrice.addEventListener('keyup', () => {
+  itemPrice.addEventListener('input', () => {
     const priceValue = itemPrice.value;
     const addTaxPrice = document.getElementById("add-tax-price");
     const profit = document.getElementById("profit");
